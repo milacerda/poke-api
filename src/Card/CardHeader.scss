@@ -1,0 +1,93 @@
+$types: (
+    "bug",
+    "dark",
+    "dragon",
+    "electric",
+    "fairy",
+    "fighting",
+    "fire",
+    "flying",
+    "ghost",
+    "grass",
+    "ground",
+    "ice",
+    "normal",
+    "poison",
+    "psychic",
+    "rock",
+    "steel",
+    "water"
+);
+
+@function capitalize($string) {
+    @return to-upper-case(str-slice($string, 1, 1))+str-slice($string, 2);
+}
+
+.pokecard-header {
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+    img {
+        z-index: 3;
+        scale: 2;
+        position: relative;
+        bottom: 60px;
+    }
+}
+
+.type-background {
+    height: 100vw;
+    width: 200vw;
+    position: absolute;
+    z-index: 1;
+    border-radius: 0 0 200vw 200vw;
+    top: -50vw;
+    
+    &.grass, &.bug {
+        background-color: #63bb5b;
+    }
+    &.fire, &.rock, &.ground, &.fighting {
+        background-color: #f8a658;
+    }
+    &.poison, &.psychic, &.ghost {
+        background-color: #955bf1;
+    }
+    &.flying, &.dragon {
+        background-color: #5bdff1;
+    }
+    &.water, &.ice {
+        background-color: #3b80e7;
+    }
+    &.electric {
+        background-color: #dce73b;
+    }
+    &.dark, &.steel, &.rock {
+        background-color: #3d3d3d;
+    }
+    &.fairy, &.normal {
+        background-color: #e491e0;
+    }
+}
+
+.icon {
+    height: 180px;
+    width: 180px;
+    background-size: cover;
+    z-index: 2;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+
+    @each $type in $types {
+        $typeCapitalized: capitalize($type);
+        &.#{$type} {
+            background-image: url("/assets/images/Pokemon_Type_Icon_" + $typeCapitalized + ".png");
+        }
+    }
+}
+
+
+
